@@ -17,7 +17,7 @@
   <body>
     <div class="container" ng-controller="AppCtrl">
       <br/>
-      <h1>Transform .docx to <b>TYPO3</b></h1>
+      <h1>Upload .docx to <b>TYPO3</b></h1>
       
       <br/>
       <ul class="nav nav-tabs">
@@ -28,41 +28,32 @@
       <div class="tab-content">
         <div id="home" class="tab-pane fade in active">
           <div class="container" >
-            <p></p>
-            <br/>
-            <span class="btn btn-lg btn-primary">.docx-Datei wählen
-              <input type="file" id="file" name="file" style:"display: none;"/>
-            </span>
+            <div id="linkespalte">
+              <div id="btnauwahl">
+                <span class="btn btn-primary">.docx-Datei wählen
+                  <input type="file" id="file" name="file" style:"display: none;"/>
+                </span>
+                <img src="styles/erfolreich.png" style="width:30px; height:30px; visibility:hidden" id="foto1">
+              </div>
+              <div id="btnkategorie">
+                <select class="btn btn-primary dropdown-toggle" ng-model="selectedKategorie" ng-options="x.name for x in kategorien">
+                  <option value="">--  Kategorie wählen  --</option>
+                </select>
+              </div>
+              <div id="btnvorschau">
+                <button type="button" class="btn btn-primary" id="blocken3" ng-click="vorschau()">Vorschau in neuem Fenster öffnen</button>
+              </div>
+              <div id="btnupload">
+                <button type="button" class="btn btn-primary" id="blocken2" ng-click="posten()">Typo3 Upload</button>
+              </div>
+            </div>
+            <div id="rechtespalte">
+              <div id="dokupfad"><b>Dateiname:</b><br/>Keine Datei für Upload ausgewählt!<br/><br/>Upload und Vorschau nicht verfügbar</div>
+              <div id="uploadready"></div>
+              <div id="inhaltet">
+              <p id="KategorieID" style="display:none;">{{selectedKategorie.id}}</p>
+            </div>
 
-            <img src="styles/erfolreich.png" style="width:30px; height:30px; visibility:hidden" id="foto1"  >
-             <select class="btn btn-lg btn-primary dropdown-toggle" ng-model="selectedKategorie" ng-options="x.name for x in kategorien">
-                <option value="">--  Kategorie wählen  --</option>
-            </select>
-            <br/>
-            <br/>
-              <div id="dokupfad"></div>
-            <br/>
-          <div id="uploadready"></div>
-            <br/>
-
-
-
-    
-          
-              
-            
-            <p id="KategorieID" style="display:none;">{{selectedKategorie.id}}</p>
-
-            <button type="button" class="btn btn-lg btn-primary" id="blocken3" ng-click="vorschau()">Vorschau öffnen</button>
-
-            <button type="button" class="btn btn-lg btn-primary" id="blocken2" ng-click="posten()">Typo3 Upload</button>
-            <br/>
-            
-            <br/>
-            <div id="inhaltet"></div>
-            <img src="styles/erfolreich.png" style="width:30px; height:30px; visibility:hidden" id="foto5"  >
-            <br/>
-            <br/>
             <div id="Seitentitel" style="display:none;"></div>
             <br/>
             <div id="Teaser" style="display:none;"></div>
@@ -78,7 +69,7 @@
             <br/>
             <p></p>
           </div>    
-        </div>
+        </div> </div>
         <div id="menu1" class="tab-pane fade">
           <div class="container" >
             <h2>Noch nicht implementiert</h2>
@@ -91,12 +82,14 @@
             <button type="button" class="btn btn-lg btn-primary" ng-click="getliste()">Get Liste</button>
             <br/>
             <br/>
+            
             <ul>
               <li ng-repeat="title in titles">{{title}}</li>
             </ul>
+          
           </div>
         </div>
-      </div>
+     
     </div> 
   </body>
 </html>

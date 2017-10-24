@@ -1,9 +1,7 @@
-  var express = require('express'),
-  fs = require('fs')
-  url = require('url');
+  var express = require('express');
+  var fs = require('fs');
   var mammoth = require('mammoth');
   var bodyParser = require('body-parser');
-  var querystring = require('querystring');
   var http = require('http');
   const cheerio = require('cheerio');
   var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
@@ -296,8 +294,45 @@
       }
 
     }
+
     jayson = JSON.stringify(jason);
-   res.send(jayson);
+    console.log("Jason.Content: " + jason.content.length);
+    var inhalte = []; 
+    var gib ="";
+              
+    for (i = 0; i < jason.content.length; i++){
+      if (jason.content[i].title != undefined && jason.content[i].description != undefined || 
+        jason.content[i].teaser != undefined) {
+          inhalte.push("<b>Title:</b> " + jason.content[i].title + "<br/>");
+          inhalte.push("<b>Description:</b> " + jason.content[i].description + "<br/>");
+          inhalte.push("<b>Teaser:</b> " + jason.content[i].teaser + "<br/>");
+      } else if (jason.content[i].p != undefined && jason.content[i].h2 != undefined){
+          inhalte.push("<b>H2: " + jason.content[i].h2 + "</b><br/>");
+          inhalte.push(jason.content[i].p + "<br/>");
+      } else if (jason.content[i].p != undefined && jason.content[i].h3 != undefined){
+          inhalte.push("<b>H3: " + jason.content[i].h3 + "</b><br/>");
+          inhalte.push(jason.content[i].p + "<br/>");
+      } else if (jason.content[i].p != undefined && jason.content[i].h4 != undefined){
+          inhalte.push("<b>H4: " + jason.content[i].h4 + "</><br/>");
+          inhalte.push(jason.content[i].p + "<br/>");
+      } else if (jason.content[i].htmlbody != undefined && jason.content[i].noheaderhtml != undefined){
+          inhalte.push("<b>HTML:</b><br/>"+jason.content[i].htmlbody + "<br/>");
+      } else if (jason.content[i].not != undefined && jason.content[i].p != undefined){
+          inhalte.push(jason.content[i].p + "<br/>");
+      } else if (jason.content[i].table != undefined && jason.content[i].nein != undefined){
+          inhalte.push("<b>TABLE:</b><br/>"+jason.content[i].table + "<br/>");
+      } else if (jason.content[i].toc != undefined){
+          inhalte.push(jason.content[i].toc + "<br/>");
+      } else if (jason.content[i].h1 != undefined){
+          inhalte.push("<b>H1: " + jason.content[i].h1 + "</b><br/>");
+      }
+      inhalte.push("=================================" + "<br/>");
+    }
+    for (z = 0; z < inhalte.length; z++){
+      gib += inhalte[z];
+    }
+
+   res.send(gib);
   });
 
   app.post('/test', function(req, res) {
@@ -567,15 +602,15 @@
     var options = {
       host: 'localhost',
       port: 80,
-      path: '/api/rest-api-client/viddel/cars/1',
+      path: '/api/rest-api-client/alldokumente',
       method: 'GET',
     };
     var httpreq = http.request(options, function(response) {
       response.setEncoding('utf8');
       response.on('data', function(chunk) {
-        //console.log("Chunk: " + chunk);
-        //console.log("Response: " + response);
-        //console.log("Res: " + res);
+        console.log("Chunk: " + chunk);
+        console.log("Response: " + response);
+        console.log("Res: " + res);
 
         res.send(chunk);
       });
