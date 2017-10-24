@@ -30,8 +30,14 @@
     float: left;
 }
 
-
+div {
+  padding: 5px 5px 5px 0px;
+  margin: 5px;
+}
 
 body {
     background-image:linear-gradient(122deg, white 80%, #003c8f 100%)
+}
+#linkespalte{
+    float: left;
 }

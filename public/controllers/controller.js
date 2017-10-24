@@ -61,8 +61,6 @@
                     $http.post('http://localhost:3000/test',{
                         "KategorieID" : document.getElementById('KategorieID').innerHTML 
                     }).then(function(response) {
-                        var img = document.getElementById('foto5');
-                        img.style.visibility = 'visible';
                         alert("Status: " + response.status + " Upload erfolgreich");
                         console.log(response);
                     });
@@ -78,6 +76,7 @@
 
         $scope.vorschau = function(){
 
+           $window.open('http://localhost:3000/vorschauansehen', '_blank','width=1000');/*
             $http.get('http://localhost:3000/vorschauansehen').then(function(response) {
                var inhalte = []; 
                
@@ -113,7 +112,7 @@
                 for (z = 0; z < inhalte.length; z++){
                     document.getElementById('inhaltet').innerHTML += inhalte[z];
                 }
-            });
+            });*/
         }
 
 
